@@ -25,8 +25,6 @@ The code works with **PyTorch** and is forked from [MMRotate dev-1.x](https://gi
 <p align="center">
   <img src="resources/framework.png" width="90%" alt="Framework">
 </p>
-
-## Visualization
 <p align="center">
   <img src="resources/visualization.png" width="90%" alt="Visualization">
 </p>
