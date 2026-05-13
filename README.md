@@ -45,6 +45,8 @@ For detailed user guides and advanced guides, please refer to MMRotate's [docume
 ## Data Preparation
 1. Download CMR segmentation datasets such as ACDC and M&Ms 2.
 2. Modify [tools/data/cmr-3d-ood/acdc_data_conversion.sh](tools/data/cmr-3d-ood/acdc_data_conversion.sh), set the path of the ACDC dataset, and run the script to convert the segmentation dataset to an oriented detection dataset. Convert the test set as well.
+3. We also provide a script for M&Ms 2 at [tools/data/cmr-3d-ood/mnms2_data_conversion.sh](tools/data/cmr-3d-ood/mnms2_data_conversion.sh).
+4. Some examples of the converted dataset are in data/cmr-3d-ood. 
 
 ## Training
 ```bash
