@@ -1,0 +1,63 @@
+# dataset settings
+dataset_type = 'CMRDataset'
+data_root = 'data/cmr-3d-ood/'
+backend_args = None
+
+train_pipeline = [
+    dict(type='mmdet.LoadImageFromFile', backend_args=backend_args),
+    dict(type='mmdet.LoadAnnotations', with_bbox=True, box_type='rbox'),
+    dict(type='mmdet.Resize', scale=(256, 256), keep_ratio=True),
+    dict(
+        type='mmdet.RandomFlip',
+        prob=0.75,
+        direction=['horizontal', 'vertical', 'diagonal']),
+    dict(type='mmdet.PackDetInputs')
+]
+val_pipeline = [
+    dict(type='mmdet.LoadImageFromFile', backend_args=backend_args),
+    dict(type='mmdet.Resize', scale=(256, 256), keep_ratio=True),
+    # avoid bboxes being resized
+    dict(type='mmdet.LoadAnnotations', with_bbox=True, box_type='rbox'),
+    dict(
+        type='mmdet.PackDetInputs',
+        meta_keys=('img_id', 'img_path', 'ori_shape', 'img_shape',
+                   'scale_factor'))
+]
+test_pipeline = [
+    dict(type='mmdet.LoadImageFromFile', backend_args=backend_args),
+    dict(type='mmdet.Resize', scale=(256, 256), keep_ratio=True),
+    dict(
+        type='mmdet.PackDetInputs',
+        meta_keys=('img_id', 'img_path', 'ori_shape', 'img_shape',
+                   'scale_factor'))
+]
+train_dataloader = dict(
+    batch_size=2,
+    num_workers=2,
+    persistent_workers=True,
+    sampler=dict(type='DefaultSampler', shuffle=True),
+    batch_sampler=None,
+    dataset=dict(
+        type=dataset_type,
+        data_root=data_root,
+        ann_file='trainval/labels/',
+        data_prefix=dict(img_path='trainval/images/'),
+        filter_cfg=dict(filter_empty_gt=True),
+        pipeline=train_pipeline))
+val_dataloader = dict(
+    batch_size=1,
+    num_workers=2,
+    persistent_workers=True,
+    drop_last=False,
+    sampler=dict(type='DefaultSampler', shuffle=False),
+    dataset=dict(
+        type=dataset_type,
+        data_root=data_root,
+        ann_file='trainval/labels/',
+        data_prefix=dict(img_path='trainval/images/'),
+        test_mode=True,
+        pipeline=val_pipeline))
+test_dataloader = val_dataloader
+
+val_evaluator = dict(type='CMRMetric', metric=['mAP', 'angle-dev', 'mIoU'])
+test_evaluator = val_evaluator
