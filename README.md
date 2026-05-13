@@ -7,7 +7,7 @@
     Parker Martin&ensp;
     Zhenyu Bu&ensp;
     Yuchi Han&ensp;
-    Yuan Xue<sup>*</sup>
+    Yuan Xue
   </p>
   <p align="center">
     If you find our work helpful, please consider giving us a ⭐.
