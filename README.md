@@ -34,6 +34,13 @@ The code works with **PyTorch** and is forked from [MMRotate dev-1.x](https://gi
 ## Installation
 Please refer to [Installation](https://mmrotate.readthedocs.io/en/1.x/get_started.html) for more detailed instructions.
 
+After install the pytorch, mmengine, mmcv, and mmdet, install mmrotate using this repository with the following commands.
+```bash
+git clone https://github.com/yuyi1005/cmr-3d-ood.git
+cd cmr-3d-ood
+pip install -v -e .
+```
+
 ## Getting Started
 Please see [Overview](https://mmrotate.readthedocs.io/en/1.x/overview.html) for the general introduction of MMRotate. 
 
